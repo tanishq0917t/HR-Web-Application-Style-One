@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>HR Application</title>
+<script>
+function validate(frm)
+{
+var valid=true;
+var firstErrorSection=null;
+var name=frm.name.value.trim();
+var nameErrorSection=document.getElementById('nameErrorSection');
+nameErrorSection.innerHTML='';
+if(name.length==0)
+{
+nameErrorSection.innerHTML='Name Required';
+if(firstErrorSection==null)firstErrorSection=frm.name;
+valid=false;
+}
+
+var designationCode=frm.designationCode.value;
+var designationCodeErrorSection=document.getElementById('designationCodeErrorSection');
+designationCodeErrorSection.innerHTML='';
+if(designationCode==-1)
+{
+designationCodeErrorSection.innerHTML='Select Designation';
+if(firstErrorSection==null)firstErrorSection=frm.designationCode;
+valid=false;
+}
+
+var genderErrorSection=document.getElementById('genderErrorSection');
+genderErrorSection.innerHTML='';
+if(frm.gender[0].checked==false && frm.gender[1].checked==false)
+{
+genderErrorSection.innerHTML='Select Gender';
+if(firstErrorSection==null)firstErrorSection=frm.gender;
+valid=false;
+}
+
+var dateOfBirth=frm.dateOfBirth.value;
+var dateOfBirthErrorSection=document.getElementById('dateOfBirthErrorSection');
+dobErrorSection.innerHTML='';
+if(dateOfBirth.length==0)
+{
+dobErrorSection.innerHTML='Select Date';
+if(firstErrorSection==null)firstErrorSection=frm.dateOfBirth;
+valid=false;
+}
+
+var basicSalary=frm.basicSalary.value.trim();
+var basicSalaryErrorSection=document.getElementById('basicSalaryErrorSection');
+basicSalaryErrorSection.innerHTML='';
+var isBasicValid=true;
+if(basicSalary.length==0)
+{
+basicSalaryErrorSection.innerHTML='Basic Salary Required';
+if(firstErrorSection==null)firstErrorSection=frm.basicSalary;
+valid=false;
+}
+else
+{
+var v='0123456789.';
+var e=0
+while(e<basicSalary.length)
+{
+if(v.indexOf(basicSalary.charAt(e))==-1)
+{
+basicSalaryErrorSection.innerHTML='Invalid Basic Salary';
+if(firstErrorSection==null)firstErrorSection=frm.basicSalary;
+valid=false;
+isBasicValid=false;
+}
+e++;
+}
+if(isBasicValid)
+{
+var dot=basicSalary.indexOf('.');
+if(dot!=-1)
+{
+var fractions=basicSalary.length-(dot+1);
+if(fractions>2)
+{
+if(firstErrorSection==null)firstErrorSection=frm.basicSalary;
+valid=false;
+basicSalaryErrorSection.innerHTML='Invalid Basic Salary';
+}
+}
+}
+}
+
+var panNumber=frm.panNumber.value.trim();
+var panNumberErrorSection=document.getElementById('panNumberErrorSection');
+panNumberErrorSection.innerHTML='';
+if(panNumber.length==0)
+{
+panNumberErrorSection.innerHTML='PAN Number Required';
+if(firstErrorSection==null)firstErrorSection=frm.panNumber;
+valid=false;
+}
+
+var aadharCardNumber=frm.aadharCardNumber.value.trim();
+var aadharCardNumberErrorSection=document.getElementById('aadharCardNumberErrorSection');
+aadharCardNumberErrorSection.innerHTML='';
+if(aadharCardNumber.length==0)
+{
+aadharCardNumberErrorSection.innerHTML='Aadhar Card Number Required';
+if(firstErrorSection==null)firstErrorSection=frm.aadharCardNumber;
+valid=false;
+}
+
+if(!valid)firstErrorSection.focus();
+return valid;
+}
+
+</script>
+</head>
+<body>
+<!-- Main Container starts here-->
+<div style='width:90hw;height:auto;border:1px solid black'>
+<!-- Header Starts here-->
+<div style='margin:5px;width:90hw;height:auto;border:1px solid black'>
+<div style='margin-top:9px;margin-bottom:9px;font-size:20pt'>Tanishq Rawat</div>
+</div><!-- Header ends here-->
+<!-- Content Section Starts here-->
+<div style='width:90hw;height:70vh;margin:5px;border:1px solid white'>
+<!-- Left Panel Starts here -->
+<div style='height:68vh;margin:5px;float:left;padding:5px;border:1px solid black'>
+<a href='/styleOne/index.html'>Home</a><br><br>
+<a href='/styleOne/designationsView'>Designations</a><br>
+<b>Employees</b>
+</div>
+<!-- Left Panel Ends here -->
+<!-- Right Panel Starts here -->
+<div style='height:68vh;margin-left:105px;margin-right:5px;padding:5px;border:1px solid black'>
+<h4>Employee Add Module</h1>
+<form action='/styleOne/addEmployee' onsubmit='return validate(this)'>
+<table>
+<tr>
+<td>Name</td>
+<td><input type='name' id='name' name='title' maxLength='35' size='36'>
+<span id='nameErrorSection' style='color:red'></span></td>
+</tr>
+<tr>
+<td>Designation</td>
+<td><select id='designationCode' name='designationCode'>
+<option value='-1'>&lt;Select Designation&gt;</option>
+<option value='1'>Manager</option>
+<option value='2'>Clerk</option>
+<option value='3'>Postman</option>
+<option value='4'>Driver</option>
+<option value='5'>Developer</option>
+</select>
+<span id='designationCodeErrorSection' style='color:red'></span>
+</td>
+</tr>
+<tr>
+<td>Date of Birth</td>
+<td><input type='date' id='dateOfBirth' name='dateOfBirth'>
+<span id='dobErrorSection' style='color:red'></span>
+</tr>
+<tr>
+<td>Gender</td>
+<td><input type='radio' id='male' name='gender' value='M'>Male
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type='radio' id='female' name='gender' value='F'>Female
+<span id='genderErrorSection' style='color:red'></span>
+</td>
+</tr>
+<tr>
+<td>Indian ?</td>
+<td><input type='checkbox' name='isIndian' id='isIndian'></td> 
+</tr>
+<tr>
+<td>Basic Salary</td>
+<td><input type='text' style='text-align:right' id='basicSalary' name='basicSalary'>
+<span id='basicSalaryErrorSection' style='color:red'></span>
+</td>
+</tr>
+<tr>
+<td>PAN Number</td>
+<td><input type='text' id='panNumber' name='panNumber' maxLength='15' size='16'>
+<span id='panNumberErrorSection' style='color:red'></span>
+</td>
+</tr>
+<tr>
+<td>Aadhar Card Number</td>
+<td><input type='text' id='aadharCardNumber' name='aadharCardNumber' maxLength='15' size='16'>
+<span id='aadharCardNumberErrorSection' style='color:red'></span>
+</td>
+</tr>
+
+<tr>
+<td>
+<button type='submit'>Add</button>&nbsp;&nbsp;</td>
+<td><button type='button' onclick='cancelAddition()'>Cancel</button></td>
+</tr>
+</table>
+</form>
+</div>
+<!-- Right Panel Ends here -->
+</div> <!-- Content Section Ends here -->
+<!-- Footer Starts here -->
+<div style='width:90hw;height:auto;margin:5px;text-align:center;border:1px solid white'>
+&copy;Tanishq Rawat 2021
+</div>
+<!-- Footer Ends here -->
+</div><!-- Main Container Ends here -->
+<form id='cancelAdditionForm' action='/styleOne/designationsView'>
+</form>
+</body>
+</html>
