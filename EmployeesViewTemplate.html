@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HR Application</title>
+<script>
+function Employee()
+{
+this.employeeId="";
+this.name="";
+this.designationCode=0;
+this.designation="";
+this.dateOfBirth="";
+this.gender="";
+this.isIndian="";
+this.basicSalary=0;
+this.panNumber="";
+this.aadharCardNumber="";
+}
+var selectedRow=null;
+var employees=[]
+var employee=new Employee();
+employee.employeeId="A1000001";
+employee.name="KL.Rahul";
+employee.designationCode=1;
+employee.designation="Clerk";
+employee.dateOfBirth="10/12/1990";
+employee.gender="Male";
+employee.isIndian=true;
+employee.basicSalary=500000;
+employee.panNumber="UID1000001";
+employee.aadharCardNumber="ABC1000001";
+employees[0]=employee;
+employee=new Employee();
+employee.employeeId="A1000002";
+employee.name="Virat Kohli";
+employee.designationCode=2;
+employee.designation="Cricketer";
+employee.dateOfBirth="11/11/1990";
+employee.gender="Male";
+employee.isIndian=true;
+employee.basicSalary=1000000;
+employee.panNumber="UID1000002";
+employee.aadharCardNumber="ABC1000002";
+employees[1]=employee;
+function selectEmployee(row,employeeId)
+{
+if(row==selectedRow) return;
+if(selectedRow!=null)
+{
+selectedRow.style.background="white";
+selectedRow.style.color="black";
+}
+row.style.background="#7C7B7B";
+row.style.color="white";
+selectedRow=row;
+var i;
+for(i=0;i<employees.length;i++)
+{
+if(employees[i].employeeId==employeeId)break;
+}
+var emp=employees[i];
+document.getElementById("detailsPanel_employeeId").innerHTML=emp.employeeId;
+document.getElementById("detailsPanel_name").innerHTML=emp.name;
+document.getElementById("detailsPanel_designation").innerHTML=emp.designation;
+document.getElementById("detailsPanel_dateOfBirth").innerHTML=emp.dateOfBirth;
+document.getElementById("detailsPanel_basicSalary").innerHTML=emp.basicSalary;
+if(emp.isIndian) document.getElementById("detailsPanel_isIndian").innerHTML="Yes";
+else document.getElementById("detailsPanel_isIndian").innerHTML="No";
+document.getElementById("detailsPanel_gender").innerHTML=emp.gender;
+document.getElementById("detailsPanel_panNumber").innerHTML=emp.panNumber;
+document.getElementById("detailsPanel_aadharCardNumber").innerHTML=emp.aadharCardNumber;
+}
+</script>
+</head>
+<body>
+	<!-- Main Container starts here-->
+<div style='width:90hw;height:auto;border:1px solid black'>
+	<!-- Header Starts here-->
+<div style='margin:5px;width:90hw;height:auto;border:1px solid black'>
+<div style='margin-top:9px;margin-bottom:9px;font-size:20pt'>Tanishq Rawat</div>
+</div>		<!-- Header ends here-->
+		<!-- Content Section Starts here-->
+<div style='width:90hw;height:70vh;margin:5px;border:1px solid white'>
+		<!-- Left Panel Starts here -->
+<div style='height:68vh;margin:5px;float:left;padding:5px;border:1px solid black'>
+<a href='/styleOne/index.html'>Home</a><br><br>
+<a href='/styleOne/designationsView'>Designations</a><br>
+<b>Employees</b>
+</div>
+<!-- Left Panel Ends here -->
+<!-- Right Panel Starts here -->
+<div style='height:68vh;margin-left:105px;margin-right:5px;padding:5px;border:1px solid black'>
+<h3>Employees</h3>
+<div style='height:30vh;margin-left:5px;margin-right:5px;padding:5px;border:1px solid black;overflow:scroll'>
+<table border='1'>
+<thead>
+<tr>
+<th colspan='6' style='text-align:right;padding:5px'>
+<a href='/styleOne/getEmployeeAddForm'>Add New Employee</a>
+</th>
+</tr>
+<tr>
+<th style='width:60px;text-align:center'>S.No.</th>
+<th style='width:200px;text-align:center'>Id</th>
+<th style='width:200px;text-align:center'>Name</th>
+<th style='width:200px;text-align:center'>Designation</th>
+<th style='width:100px;text-align:center'>Edit</th>
+<th style='width:100px;text-align:center'>Delete</th>
+</tr>
+</thead>
+<tbody>
+<tr style='cursor:pointer' onclick='selectEmployee(this,"A1000001")'>
+<td style='text-align:right'>1.</td>
+<td style='text-align:center'>A1000001</td>
+<td style='text-align:center'>KL Rahul</td>
+<td style='text-align:center'>Clerk</td>
+<td style='text-align:center'><a href='/styleOne/editEmployee?employeeId='A1000001'>Edit</a></td>
+<td style='text-align:center'><a href='/styleOne/confirmDeleteEmployee?employeeId='A1000001'>Delete</a></td>
+</tr>
+<tr style='cursor:pointer' onclick='selectEmployee(this,"A1000002")'>
+<td style='text-align:right'>2.</td>
+<td style='text-align:center'>A1000002</td>
+<td style='text-align:center'>Virat Kohli</td>
+<td style='text-align:center'>Cricketer</td>
+<td style='text-align:center'><a href='/styleOne/editEmployee?employeeId='A1000002'>Edit</a></td>
+<td style='text-align:center'><a href='/styleOne/confirmDeleteEmployee?employeeId='A1000002'>Delete</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style='height:19vh;margin-left:5px;margin-right:5px;margin-bottom:px;border:1px solid black'>
+<label style='background:gray;color:white;padding-left:5px;padding-right:5px'>Details</label>
+<table border='0' width="100%">
+<tr>
+<td>Employee Id: <span id='detailsPanel_employeeId' style='margin-right:30px'></span></td>
+<td>Name: <span id='detailsPanel_name' style='margin-right:30px'></span></td>
+<td>Designation: <span id='detailsPanel_designation' style='margin-right:30px'></span></td>
+</tr>
+<tr>
+<td>Salary: <span id='detailsPanel_basicSalary' style='margin-right:30px'></span></td>
+<td>Date Of Birth: <span id='detailsPanel_dateOfBirth' style='margin-right:30px'></span></td>
+<td>Is Indian: <span id='detailsPanel_isIndian' style='margin-right:30px'></span></td>
+</tr>
+<tr>
+<td>Gender: <span id='detailsPanel_gender' style='margin-right:30px'></span></td>
+<td>Pan Number: <span id='detailsPanel_panNumber' style='margin-right:30px'></span></td>
+<td>Aadhar Card Number: <span id='detailsPanel_aadharCardNumber' style='margin-right:30px'></span></td>
+</tr>
+</table>
+</div>
+<!-- Right Panel Ends here -->
+</div> <!-- Content Section Ends here -->
+<!-- Footer Starts here -->
+<div style='width:90hw;height:auto;margin:5px;text-align:center;border:1px solid white'>
+&copy;Tanishq Rawat 2021
+</div>
+<!-- Footer Ends here -->
+</div><!-- Main Container Ends here -->
+</body>
+</html>
